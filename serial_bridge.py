@@ -43,6 +43,8 @@ class SerialServoBridge:
 
     def send_angles(self, pan: float, tilt: float, force: bool = False) -> Tuple[int, int]:
         """Clamp to 0-180, send if changed, and return the integer angles."""
+        if not math.isfinite(pan) or not math.isfinite(tilt):
+            raise ValueError("Servo angles must be finite numbers.")
         angles = (round(max(0.0, min(180.0, pan))), round(max(0.0, min(180.0, tilt))))
         if self.conn and (force or angles != self.last_sent):
             try:
