@@ -1,5 +1,6 @@
 """Serial link to the pan/tilt firmware. Protocol: one ASCII line "pan,tilt\\n" per update."""
 
+import math
 import time
 from typing import Optional, Tuple
 
